@@ -99,52 +99,18 @@ namespace Incedo_Octavius_Demo_2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MapID,Degree_Map,Parent_Degree_ID,DegreeID,Degree_Master")] BusinessUserDegreeModel businessUserDegreeModel)
+        public ActionResult Create([Bind(Include = "MapID,Degree_Map,Parent_Degree_ID,DegreeID,Degree_Master,DegreesList")] BusinessUserDegreeModel businessUserDegreeModel)
         {
 
             if (ModelState.IsValid)
             {
-                using (MySqlConnection dbConnection = new MySqlConnection(constr))
+                //businessUserDegreeModel.DegreesList = PopulateDegrees();
+                /*var selected_Item = businessUserDegreeModel.DegreesList.Find(p => p.Value == businessUserDegreeModel.Parent_Degree_ID.ToString());
+                if (selected_Item != null)
                 {
-                    try
-                    {
-                        dbConnection.Open();
-                        MySqlCommand cmd = new MySqlCommand();
-                        cmd.Connection = dbConnection;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "Rules_BU_Deg_INSERT";
-                        cmd.Parameters.AddWithValue("deg_text", businessUserDegreeModel.Degree_Map);
-                        cmd.Parameters.AddWithValue("deg_id", businessUserDegreeModel.Parent_Degree_ID);
-                        cmd.ExecuteNonQuery();
-                        dbConnection.Close();
-
-                        /*MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                        DataSet dataSetObject = new DataSet();
-                        dataAdapter.Fill(dataSetObject);
-
-                        if (dataSetObject.Tables[0].Rows.Count > 0)
-                        {
-                            for (int iCout = 0; iCout < dataSetObject.Tables[0].Rows.Count; iCout++)
-                            {
-                                BusinessUserDegreeModel RuleDegBU = new BusinessUserDegreeModel();
-                                RuleDegBU.MapID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["MapID"]);
-                                RuleDegBU.DegreeID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["DegreeID"]);
-                                RuleDegBU.Degree_Map = dataSetObject.Tables[0].Rows[iCout]["Degree_Map"].ToString();
-                                RuleDegBU.Parent_Degree_ID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["Parent_Degree_ID"]);
-                                RuleDegBU.Degree_Master = dataSetObject.Tables[0].Rows[iCout]["Degree_Master"].ToString();
-
-                                RuleDegBU_List.Add(RuleDegBU);
-                            }
-                        }*/
-
-                    }
-                    catch (Exception Ex)
-                    {
-
-                        Console.WriteLine("Error : " + Ex.Message);
-                    }
-
-                }
+                    selected_Item.Selected = true;
+                    ViewBag.msg = "Degree : " + selected_Item.Text;
+                }*/
 
                 return RedirectToAction("Index");
             }
@@ -281,58 +247,16 @@ namespace Incedo_Octavius_Demo_2.Controllers
         // GET: BusinessUserDegreeModels/Delete/5
         public ActionResult Delete(int? id)
         {
-            List<BusinessUserDegreeModel> RuleDegBU_List = new List<BusinessUserDegreeModel>();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            /*BusinessUserDegreeModel businessUserDegreeModel = db.BusinessUserDegreeModels.Find(id);
+            BusinessUserDegreeModel businessUserDegreeModel = db.BusinessUserDegreeModels.Find(id);
             if (businessUserDegreeModel == null)
             {
                 return HttpNotFound();
-            }*/
-
-            using (MySqlConnection dbConnection = new MySqlConnection(constr))
-            {
-                try
-                {
-                    dbConnection.Open();
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = dbConnection;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Rules_BU_Deg_pm";
-                    cmd.Parameters.AddWithValue("id", id);
-
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    DataSet dataSetObject = new DataSet();
-                    dataAdapter.Fill(dataSetObject);
-
-                    if (dataSetObject.Tables[0].Rows.Count > 0)
-                    {
-                        for (int iCout = 0; iCout < dataSetObject.Tables[0].Rows.Count; iCout++)
-                        {
-                            BusinessUserDegreeModel RuleDegBU = new BusinessUserDegreeModel();
-                            RuleDegBU.MapID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["MapID"]);
-                            RuleDegBU.DegreeID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["DegreeID"]);
-                            RuleDegBU.Degree_Map = dataSetObject.Tables[0].Rows[iCout]["Degree_Map"].ToString();
-                            RuleDegBU.Parent_Degree_ID = Convert.ToInt32(dataSetObject.Tables[0].Rows[iCout]["Parent_Degree_ID"]);
-                            RuleDegBU.Degree_Master = dataSetObject.Tables[0].Rows[iCout]["Degree_Master"].ToString();
-
-                            RuleDegBU_List.Add(RuleDegBU);
-                        }
-                    }
-
-                }
-                catch (Exception Ex)
-                {
-
-                    Console.WriteLine("Error : " + Ex.Message);
-                }
-
             }
-
-
-            return View(RuleDegBU_List[0]);
+            return View(businessUserDegreeModel);
         }
 
         // POST: BusinessUserDegreeModels/Delete/5
@@ -340,31 +264,9 @@ namespace Incedo_Octavius_Demo_2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            /*BusinessUserDegreeModel businessUserDegreeModel = db.BusinessUserDegreeModels.Find(id);
+            BusinessUserDegreeModel businessUserDegreeModel = db.BusinessUserDegreeModels.Find(id);
             db.BusinessUserDegreeModels.Remove(businessUserDegreeModel);
-            db.SaveChanges();*/
-            using (MySqlConnection dbConnection = new MySqlConnection(constr))
-            {
-                try
-                {
-                    dbConnection.Open();
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = dbConnection;
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "Rules_BU_Deg_DELETE";
-                    cmd.Parameters.AddWithValue("map_id", id);
-
-                    cmd.ExecuteNonQuery();
-                    dbConnection.Close();
-
-                }
-                catch (Exception Ex)
-                {
-
-                    Console.WriteLine("Error : " + Ex.Message);
-                }
-
-            }
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

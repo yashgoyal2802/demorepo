@@ -191,3 +191,5 @@ C:\Users\sushil.kumar2\source\repos\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_
 C:\Users\sushil.kumar2\source\repos\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_2\bin\zh-Hans\System.Spatial.resources.dll
 C:\Users\sushil.kumar2\source\repos\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_2\bin\zh-Hant\System.Spatial.resources.dll
 C:\Users\sushil.kumar2\source\repos\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_2\obj\Debug\Incedo_Octavius_Demo_2.csproj.AssemblyReference.cache
+C:\Users\sushil.kumar2\Documents\Capstone Project\Octavious Project\Octavius Github\Octavius_v2\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_2\obj\Debug\Incedo_Octavius_Demo_2.dll
+C:\Users\sushil.kumar2\Documents\Capstone Project\Octavious Project\Octavius Github\Octavius_v2\Incedo_Octavius_Demo_2\Incedo_Octavius_Demo_2\obj\Debug\Incedo_Octavius_Demo_2.pdb
