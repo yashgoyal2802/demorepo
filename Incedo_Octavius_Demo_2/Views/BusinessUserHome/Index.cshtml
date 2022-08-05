@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Business User Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <div class="container-fluid text-center" style="color:black">
+        <div class="row container-fluid">
+            <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color:orange; padding:50px">
+                <h2>
+                    @Html.ActionLink("Degree", "Index", "BusinessUserDegreeModels")
+                </h2>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center" style="background-color: deepskyblue; padding: 50px">
+                <h2>
+                    @Html.ActionLink("Speciality", "Index", "BusinessUserSpecialtyModels")
+                </h2>
+            </div>
+        </div>
+    </div>
+    @*@{Html.RenderAction("Index", "BusinessUserDegreeModels"); }*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
