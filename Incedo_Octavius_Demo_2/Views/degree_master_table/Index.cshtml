@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Incedo_Octavius_Demo_2.Models.degree_master_table>
 
 @{
+
     ViewBag.Title = "Index";
 }
 
@@ -17,17 +18,19 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Degree)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DegreeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DegreeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DegreeID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Degree)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.DegreeID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.DegreeID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.DegreeID })
+            </td>
+        </tr>
+
+    }
 
 </table>
